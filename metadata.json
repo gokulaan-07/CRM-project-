@@ -1,0 +1,6 @@
+{
+  "name": "CRM - Sales & Customer Management",
+  "description": "Internal CRM web application for sales teams to manage leads, follow-ups, deal pipeline, customer conversions, and team analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
