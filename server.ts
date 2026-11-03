@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
@@ -13,7 +14,7 @@ import { generateToken, authMiddleware, requireRole, AuthRequest } from './serve
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   // 1. Connect to Real MongoDB (External MongoDB or Embedded Mongo Server)
   await connectToDatabase();
@@ -798,7 +799,8 @@ async function startServer() {
   });
 
   // Vite middleware for dev / static files for production
-  if (process.env.NODE_ENV !== 'production') {
+  const isProduction = process.env.NODE_ENV === 'production' || !!process.env.RENDER || !!process.env.RAILWAY_ENVIRONMENT;
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
